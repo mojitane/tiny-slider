@@ -2204,7 +2204,13 @@ export var tns = function(options) {
     while (target !== navContainer && !hasAttr(target, 'data-nav')) { target = target.parentNode; }
     if (hasAttr(target, 'data-nav')) {
       navIndex = navClicked = [].indexOf.call(navItems, target);
-      goTo(navIndex, e);
+      if( navIndex != navCurrentIndexCached ) {
+        goTo(navIndex, e);
+      }
+      else {
+        // FIXME: update status on click on active item
+        updateNavStatus();
+      }
     }
   }
 
